@@ -5,7 +5,7 @@ import EditableTDElement from "./EditableTDElement";
 import { useState } from "react";
 
 export default function TabBody() {
-  const [input, setInput] = useState(taskData);
+  const [input, setInput] = useState(() => taskData);
 
   function handleChange(inputValue, taskIndex, updateIndex, updateIdentifier) {
     setInput((prevData) => {
@@ -52,15 +52,10 @@ export default function TabBody() {
                   <td key={`${taskIndex}${updateIndex}90`} className="date">
                     {update[0]}
                   </td>
-                  <EditableTDElement key={`${taskIndex}${updateIndex}91`} className="task-update" onChange={(event) => handleChange(event.target.value, taskIndex, updateIndex, "task-update")} value={update[1]} />
-                  <EditableTDElement key={`${taskIndex}${updateIndex}92`} className="comments" onChange={(event) => handleChange(event.target.value, taskIndex, updateIndex, "comment")} value={update[2]} />
 
-                  {/* <td key={`${taskIndex}${updateIndex}91`} className="task-update">
-                    <input type="text" onChange={(event) => handleChange(event.target.value, taskIndex, updateIndex, "task-update")} value={update[1]} />
-                  </td> */}
-                  {/* <td key={`${taskIndex}${updateIndex}92`} className="comments">
-                    <input type="text" onChange={(event) => handleChange(event.target.value, taskIndex, updateIndex, "comment")} value={update[2]} />
-                  </td> */}
+                  <EditableTDElement key={`${taskIndex}${updateIndex}91`} className="task-update" onChange={(event) => handleChange(event.target.value, taskIndex, updateIndex, "task-update")} inputValue={update[1]} />
+
+                  <EditableTDElement key={`${taskIndex}${updateIndex}92`} className="comments" onChange={(event) => handleChange(event.target.value, taskIndex, updateIndex, "comment")} inputValue={update[2]} />
                 </tr>
               ))}
             </>
