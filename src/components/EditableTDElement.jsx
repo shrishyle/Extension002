@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function EditableTDElement({ keyValue, className, onChangeHandler, inputValue }) {
+export default function EditableTDElement({ keyValue, className, changeHandleFunc, taskIndex, updateIndex, task_category, inputValue }) {
   const [tdState, set_tdState] = useState(false);
 
   function editHandler(event) {
@@ -8,11 +8,11 @@ export default function EditableTDElement({ keyValue, className, onChangeHandler
     setTimeout(() => {
       event.target.firstChild.focus();
     }, 25);
-    console.log(event.target.firstChild);
   }
 
   function handleBlur(event) {
     set_tdState(false);
+    // changeHandleFunc(inputValue, taskIndex, updateIndex, task_category);
   }
 
   return (
@@ -22,11 +22,15 @@ export default function EditableTDElement({ keyValue, className, onChangeHandler
         <input
           key={`${keyValue}56`}
           type="text"
-          onChange={({ event_target_value, taskIndex, updateIndex, fieldID }) => onChangeHandler(event_target_value, taskIndex, updateIndex, fieldID)}
           defaultValue={inputValue}
           onBlur={(event) => handleBlur(event)}
+          onChange={(event) => {
+            changeHandleFunc(event.target.value, taskIndex, updateIndex, task_category);
+          }}
         />
       )}
     </td>
   );
 }
+
+// onChange={({ event_target_value, taskIndex, updateIndex, fieldID }) => onChangeHandler(event_target_value, taskIndex, updateIndex, fieldID)}

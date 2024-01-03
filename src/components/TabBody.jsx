@@ -1,14 +1,14 @@
-import "./TabBody.css";
-import taskData from "./API";
+import taskData from "../API/API";
 import TableHeader from "./TableHeader";
 import EditableTDElement from "./EditableTDElement";
 import { useState } from "react";
+import "./TabBody.css";
 
 export default function TabBody() {
-  const [input, setInput] = useState(() => taskData);
+  const [data, setData] = useState(() => taskData);
 
   function handleChange(inputValue, taskIndex, updateIndex, updateIdentifier) {
-    setInput((prevData) => {
+    setData((prevData) => {
       if (updateIndex === null) {
         let newTaskData = [...prevData];
         newTaskData[taskIndex].taskDescription = inputValue;
@@ -26,6 +26,11 @@ export default function TabBody() {
         return newTaskData;
       }
     });
+    console.log("hehehehe");
+    console.log("inputValue = ", inputValue);
+    console.log("taskIndex = ", taskIndex);
+    console.log("updateIndex = ", updateIndex);
+    console.log("updateIdentifier = ", updateIdentifier);
   }
 
   let display = <p>There are no tasks to display !!</p>;
@@ -52,10 +57,12 @@ export default function TabBody() {
                   <td key={`${taskIndex}${updateIndex}90`} className="date">
                     {update[0]}
                   </td>
+                  {console.log("update[2] = ", update[2])}
+                  {/* <EditableTDElement key={`${taskIndex}${updateIndex}91`} className="task-update" changeHandleFunc={(event) => handleChange(event.target.value, taskIndex, updateIndex, "task-update")} inputValue={update[1]} /> */}
+                  <EditableTDElement key={`${taskIndex}${updateIndex}92`} className="comments" changeHandleFunc={handleChange} taskIndex={taskIndex} updateIndex={updateIndex} task_category="comment" inputValue={update[2]} />
 
-                  <EditableTDElement key={`${taskIndex}${updateIndex}91`} className="task-update" onChange={(event) => handleChange(event.target.value, taskIndex, updateIndex, "task-update")} inputValue={update[1]} />
-
-                  <EditableTDElement key={`${taskIndex}${updateIndex}92`} className="comments" onChange={(event) => handleChange(event.target.value, taskIndex, updateIndex, "comment")} inputValue={update[2]} />
+                  {/* <EditableTDElement key={`${taskIndex}${updateIndex}91`} className="task-update" changeHandleFunc={(event) => handleChange(event.target.value, taskIndex, updateIndex, "task-update")} inputValue={update[1]} />
+                  <EditableTDElement key={`${taskIndex}${updateIndex}92`} className="comments" changeHandleFunc={(event) => handleChange(event.target.value, taskIndex, updateIndex, "comment")} inputValue={update[2]} /> */}
                 </tr>
               ))}
             </>
