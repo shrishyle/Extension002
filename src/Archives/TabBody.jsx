@@ -1,10 +1,9 @@
-
 import taskData from "../data/API";
 import TableHeader from "./TableHeader";
 import EditableTDElement from "./EditableTDElement";
 import { useState } from "react";
 
-export default function TabBody() {
+function TabBody() {
   const [input, setInput] = useState(() => taskData);
 
   function handleChange(inputValue, taskIndex, updateIndex, updateIdentifier) {

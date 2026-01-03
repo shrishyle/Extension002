@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function EditableTDElement({ keyValue, className, onChangeHandler, inputValue }) {
+function EditableTDElement({ keyValue, className, onChangeHandler, inputValue }) {
   const [tdState, set_tdState] = useState(false);
 
   function editHandler(event) {
