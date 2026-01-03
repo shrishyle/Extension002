@@ -1,4 +1,4 @@
-import "./TabBody.css";
+
 import taskData from "./API";
 import TableHeader from "./TableHeader";
 import EditableTDElement from "./EditableTDElement";
