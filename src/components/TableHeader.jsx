@@ -1,11 +1,11 @@
-import React from "react"; // Add this line
+import React from "react";
 export default function TableHeader() {
   return (
     <thead>
       <tr>
         <th
           key={"2000"}
-          className="min-w-1/12 max-h-24 p-1 border-none bg-blue-200 font-(family-name:<calibri>) font-medium pr-2 pl-2 pt-1 pb-1 rounded-tl-xl
+          className="min-w-1/12 max-h-24 p-1 border-none bg-blue-200 font-(family-name:<calibri>) font-medium pr-2 pl-2 pt-1 pb-1 rounded-tl-xl 
  "
         >
           Sr. No.

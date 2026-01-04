@@ -18,13 +18,13 @@ const TableBody = ({ data, taskCategory }) => {
           </tr>
           {task.taskUpdate.map((update, updateIndex) => (
             <tr key={`${taskIndex}${updateIndex}8`}>
-              <td key={`${taskIndex}${updateIndex}90`} className="border border-gray-300 text-center pr-2 pl-2 pt-1 pb-1 cursor-pointer">
+              <td key={`${taskIndex}${updateIndex}90`} className="border border-gray-300 text-center pr-2 pl-2 cursor-pointer">
                 {update[0]}
               </td>
-              <td key={`${taskIndex}${updateIndex}90`} className="border border-gray-300 pr-2 pl-2 pt-1 pb-1 cursor-pointer">
+              <td key={`${taskIndex}${updateIndex}90`} className="border border-gray-300 pr-2 pl-2 cursor-pointer">
                 {update[1]}
               </td>
-              <td key={`${taskIndex}${updateIndex}90`} className="border border-gray-300 pr-2 pl-2 pt-1 pb-1 cursor-pointer">
+              <td key={`${taskIndex}${updateIndex}90`} className="border border-gray-300 pr-2 pl-2 cursor-pointer">
                 {update[2]}
               </td>
             </tr>

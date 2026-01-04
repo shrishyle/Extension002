@@ -1,4 +1,4 @@
-import React from "react"; // Add this line
+import React from "react"; 
 function Header() {
   return (
     <header className="w-full h-12 font-(family-name:--calibri) bg-blue-400 flex items-center justify-center shadow-md text-white">
