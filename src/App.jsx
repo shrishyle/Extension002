@@ -1,15 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "./components/Sidebar";
 import TabHeader from "./components/TabHeader";
-import taskData from "./data/API";
-import { useState } from "react";
 import TableHeader from "./components/TableHeader";
 import TableBody from "./components/TableBody";
-
-const uniqueTaskCategories = [...new Set(taskData.map((task) => task.taskCategory))];
+import { saveTasksToLocalStorage, getTasksFromLocalStorage } from "./APIs/api";
 
 function App() {
+  const [tasks, setTasks] = useState(() => {
+    return getTasksFromLocalStorage();
+  });
+
+  const uniqueTaskCategories = [...new Set(tasks.map((task) => task.taskCategory))];
+
   const [activeCategory, setActiveCategory] = useState(uniqueTaskCategories[0]);
+
+  useEffect(() => {
+    saveTasksToLocalStorage(tasks);
+  }, [tasks]);
 
   function handleTaskCategoryClick(category) {
     setActiveCategory(category);
@@ -26,10 +33,18 @@ function App() {
             ))}
           </div>
           <div id="task-display-container" className="w-full h-14/15 flex flex-col items-center justify-start mt-3">
-            <table className="min-w-3.5 max-w-[90%] w-auto ">
-              <TableHeader />
-              <TableBody data={taskData} taskCategory={activeCategory} />
-            </table>
+            {!tasks && (
+              <div>
+                <p>Create your first Task</p>
+                <button>Create New Task</button>
+              </div>
+            )}
+            {tasks && (
+              <table className="min-w-3.5 max-w-[90%] w-auto ">
+                <TableHeader />
+                <TableBody data={tasks} taskCategory={activeCategory} />
+              </table>
+            )}
           </div>
         </div>
       </div>
