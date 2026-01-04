@@ -25,7 +25,7 @@ function App() {
               <TabHeader key={category} taskCategory={category} showTasks={() => handleTaskCategoryClick(category)} isActive={category === activeCategory} />
             ))}
           </div>
-          <div id="task-display-container" className="w-full h-14/15 flex flex-col items-center justify-start mt-2">
+          <div id="task-display-container" className="w-full h-14/15 flex flex-col items-center justify-start mt-3">
             <table className="min-w-3.5 max-w-[90%] w-auto ">
               <TableHeader />
               <TableBody data={taskData} taskCategory={activeCategory} />
