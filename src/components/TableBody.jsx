@@ -2,7 +2,6 @@ import React from "react";
 
 const TableBody = ({ data, taskCategory }) => {
   let taskToDisplay = data.filter((task) => task.taskCategory === taskCategory);
-  console.log(taskToDisplay);
 
   return (
     <>
