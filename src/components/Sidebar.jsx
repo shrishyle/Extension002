@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import CreateNewTaskBtn from "./CreateNewTaskBtn";
 
-const Sidebar = () => {
+const Sidebar = ({ data }) => {
   const [display, setDisplay] = useState(() => {
     return {
       showCreateNewTaskBtn: true,
