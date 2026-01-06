@@ -10,6 +10,8 @@ const Sidebar = ({ data }) => {
       showModifyTaskForm: false,
       showAddUpdateBtn: false,
       showAddUpdateForm: false,
+      showModifyUpdateBtn: false,
+      showModifyUpdateForm: false,
     };
   });
 
