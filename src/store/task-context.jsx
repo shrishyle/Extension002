@@ -3,6 +3,7 @@ import { saveTasksToLocalStorage, getTasksFromLocalStorage } from "../APIs/api";
 
 export const TaskContext = createContext({
   tasks: [],
+  generateUniqueTaskCategories: () => {},
   createNewTask: () => {},
   modifyTask: () => {},
   deleteTask: () => {},
@@ -41,10 +42,15 @@ function taskReducer({ state, action }) {
     //...
   }
 
+  if (action.type === "generate_unique_task_list") {
+    const uniqueTaskCategories = [...new Set(state.map((task) => task.taskCategory))];
+    return uniqueTaskCategories;
+  }
+
   return state;
 }
 
-export default function TaskContextProvider({ children }) {
+export function TaskContextProvider({ children }) {
   const [tasks, taskDispatch] = useReducer(taskReducer, getTasksFromLocalStorage());
 
   function handleCreateNewTask(id) {
@@ -94,18 +100,26 @@ export default function TaskContextProvider({ children }) {
       type: "delete_task_update",
       payload: {},
     });
+
+    function generateUniqueTaskCategories() {
+      taskDispatch({
+        type: "generate_unique_task_list",
+        payload: {},
+      });
+    }
+
+    const taskValue = {
+      tasks: tasks,
+      createNewTask: handleCreateNewTask,
+      modifyTask: handleModifyTask,
+      deleteTask: handleDeleteTask,
+      changeTaskCategory: handleChangeTaskCategory,
+      addNewUpdate: handleAddNewUpdate,
+      modifyTaskUpdate: handleModifyTaskUpdate,
+      deleteTaskUpdate: handleDeleteTaskUpdate,
+      generateUniqueTaskCategories: generateUniqueTaskCategories,
+    };
+
+    return <TaskContext.Provider value={taskValue}>{children}</TaskContext.Provider>;
   }
-
-  const taskValue = {
-    tasks: tasks,
-    createNewTask: handleCreateNewTask,
-    modifyTask: handleModifyTask,
-    deleteTask: handleDeleteTask,
-    changeTaskCategory: handleChangeTaskCategory,
-    addNewUpdate: handleAddNewUpdate,
-    modifyTaskUpdate: handleModifyTaskUpdate,
-    deleteTaskUpdate: handleDeleteTaskUpdate,
-  };
-
-  return <TaskContext.Provider value={taskValue}>{children}</TaskContext.Provider>;
 }

@@ -23,7 +23,7 @@ const Container = () => {
 
   return (
     <div id="container" className="w-full h-screen flex flex-row">
-      <Sidebar data={tasks} />
+      <Sidebar taskData={tasks} />
       <div id="container-right" className="w-full h-full flex flex-col justify-center align-center">
         <div className="w-full h-auto flex flex-row m-1">
           {uniqueTaskCategories.map((category) => (

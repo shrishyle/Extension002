@@ -163,7 +163,7 @@ function formReducer({ state, action }) {
   return state;
 }
 
-export default function FormDisplayContextProvider({ children }) {
+export function FormDisplayContextProvider({ children }) {
   const [formDisplay, formDisplayDispatch] = useReducer(formReducer, formDisplayStatusObject);
 
   //1
