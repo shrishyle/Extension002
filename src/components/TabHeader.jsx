@@ -1,5 +1,3 @@
-import React from "react";
-
 let activeClass = `bg-teal-700 text-teal-50`;
 let inActiveClass = `bg-stone-50 text-teal-700 border-indigo-500/100`;
 

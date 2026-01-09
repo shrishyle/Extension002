@@ -1,4 +1,3 @@
-import React from "react";
 import TH from "./TH";
 export default function TableHeader() {
   return (

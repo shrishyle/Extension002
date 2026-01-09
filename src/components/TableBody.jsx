@@ -1,5 +1,3 @@
-import React from "react";
-
 const TableBody = ({ data, taskCategory }) => {
   let taskToDisplay = data.filter((task) => task.taskCategory === taskCategory);
   let defaultCalsses = "border cursor-pointer border-gray-300";

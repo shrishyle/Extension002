@@ -18,15 +18,7 @@ function EditableTDElement({ keyValue, className, onChangeHandler, inputValue })
   return (
     <td key={keyValue} className={className} onClick={(event) => editHandler(event)}>
       {!tdState && inputValue}
-      {tdState && (
-        <input
-          key={`${keyValue}56`}
-          type="text"
-          onChange={({ event_target_value, taskIndex, updateIndex, fieldID }) => onChangeHandler(event_target_value, taskIndex, updateIndex, fieldID)}
-          defaultValue={inputValue}
-          onBlur={(event) => handleBlur(event)}
-        />
-      )}
+      {tdState && <input key={`${keyValue}56`} type="text" onChange={({ event_target_value, taskIndex, updateIndex, fieldID }) => onChangeHandler(event_target_value, taskIndex, updateIndex, fieldID)} defaultValue={inputValue} onBlur={(event) => handleBlur(event)} />}
     </td>
   );
 }

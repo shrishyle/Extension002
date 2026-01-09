@@ -1,9 +1,5 @@
-import React from 'react'
-
 const AddUpdateForm = () => {
-  return (
-    <div>AddUpdateForm</div>
-  )
-}
+  return <div>AddUpdateForm</div>;
+};
 
-export default AddUpdateForm
+export default AddUpdateForm;

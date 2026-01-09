@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from "react";
+import { createContext, useReducer } from "react";
 import { saveTasksToLocalStorage, getTasksFromLocalStorage } from "../APIs/api";
 
 export const TaskContext = createContext({
