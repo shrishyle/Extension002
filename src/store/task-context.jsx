@@ -108,7 +108,5 @@ export const TaskContextProvider = ({ children }) => {
     deleteTaskUpdate: handleDeleteTaskUpdate,
   };
 
-
-
   return <TaskContext.Provider value={taskValue}>{children}</TaskContext.Provider>;
 };
