@@ -4,7 +4,7 @@ import CreateNewTaskForm from "./Forms/CreateNewTaskForm";
 import { FormDisplayContext } from "../store/form-display-context";
 import React from "react";
 
-const Sidebar = ({ taskData }) => {
+const Sidebar = () => {
   const { formDisplay } = useContext(FormDisplayContext);
 
   return (
