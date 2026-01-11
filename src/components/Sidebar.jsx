@@ -3,6 +3,7 @@ import CreateNewTaskForm from "./Forms/CreateNewTaskForm";
 import { FormDisplayContext } from "../store/form-display-context";
 import Button from "./Button";
 import ModifyTaskForm from "./Forms/ModifyTaskForm";
+import AddUpdateForm from "./Forms/AddUpdateForm";
 import React from "react";
 
 const Sidebar = () => {
@@ -31,7 +32,7 @@ const Sidebar = () => {
           }}
         />
       )}
-      {formDisplay.showModifyTaskForm && <ModifyTaskForm />}
+      {formDisplay.showAddUpdateForm && <AddUpdateForm />}
       {formDisplay.showAddUpdateBtn && (
         <Button
           type="button"
@@ -42,6 +43,7 @@ const Sidebar = () => {
           }}
         />
       )}
+      {formDisplay.showModifyUpdateForm && <ModifyTaskForm />}
       {formDisplay.showModifyUpdateBtn && (
         <Button
           type="button"
