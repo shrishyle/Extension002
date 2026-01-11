@@ -1,24 +1,16 @@
+import React from "react";
 import TH from "./TH";
 export default function TableHeader() {
   return (
     <thead>
       <tr>
-        <TH key={"2000"} classes="pr-2 pl-2 pt-1 pb-1 rounded-tl-xl">
-          Sr. No.
-        </TH>
-        <TH key={"2001"} classes="pr-2 pl-2 pt-1 pb-1">
-          Task Description
-        </TH>
-        <TH key={"2002"} classes="pr-2 pl-2 pt-1 pb-1">
-          Date
-        </TH>
-        <TH key={"2003"} classes="pr-2 pl-2 pt-1 pb-1">
-          Task Update
-        </TH>
-        <TH key={"2004"} classes="pr-2 pl-2 pt-1 pb-1 rounded-tr-xl">
-          Comments
-        </TH>
+        <TH classes="pr-2 pl-2 pt-1 pb-1 rounded-tl-xl" label="Sr. No."></TH>
+        <TH classes="pr-2 pl-2 pt-1 pb-1" label="Task Description"></TH>
+        <TH classes="pr-2 pl-2 pt-1 pb-1" label="Date"></TH>
+        <TH classes="pr-2 pl-2 pt-1 pb-1" label="Task Update"></TH>
+        <TH classes="pr-2 pl-2 pt-1 pb-1 rounded-tr-xl" label="Comments"></TH>
       </tr>
     </thead>
   );
 }
+

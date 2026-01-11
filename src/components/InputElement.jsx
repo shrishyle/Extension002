@@ -1,3 +1,4 @@
+import React from "react";
 const InputElement = ({ label, name, type, propClass, ...props }) => {
   let classes = ``;
   return (

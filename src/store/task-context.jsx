@@ -1,9 +1,9 @@
 import { createContext, useReducer } from "react";
+import React from "react";
 import { saveTasksToLocalStorage, getTasksFromLocalStorage } from "../APIs/api";
 
 export const TaskContext = createContext({
   tasks: [],
-  generateUniqueTaskCategories: () => {},
   createNewTask: () => {},
   modifyTask: () => {},
   deleteTask: () => {},
@@ -13,7 +13,7 @@ export const TaskContext = createContext({
   deleteTaskUpdate: () => {},
 });
 
-function taskReducer({ state, action }) {
+function taskReducer(state, action) {
   if (action.type === "create_new_task") {
     //...
   }
@@ -42,15 +42,10 @@ function taskReducer({ state, action }) {
     //...
   }
 
-  if (action.type === "generate_unique_task_list") {
-    const uniqueTaskCategories = [...new Set(state.map((task) => task.taskCategory))];
-    return uniqueTaskCategories;
-  }
-
   return state;
 }
 
-export function TaskContextProvider({ children }) {
+export const TaskContextProvider = ({ children }) => {
   const [tasks, taskDispatch] = useReducer(taskReducer, getTasksFromLocalStorage());
 
   function handleCreateNewTask(id) {
@@ -60,66 +55,60 @@ export function TaskContextProvider({ children }) {
     });
   }
 
-  function handleModifyTask(productId, amount) {
+  function handleModifyTask() {
     taskDispatch({
       type: "modify_task",
       payload: {},
     });
   }
 
-  function handleDeleteTask(productId, amount) {
+  function handleDeleteTask() {
     taskDispatch({
       type: "delete_task",
       payload: {},
     });
   }
 
-  function handleChangeTaskCategory(productId, amount) {
+  function handleChangeTaskCategory() {
     taskDispatch({
       type: "change_task_category",
       payload: {},
     });
   }
 
-  function handleAddNewUpdate(productId, amount) {
+  function handleAddNewUpdate() {
     taskDispatch({
       type: "add_new_update",
       payload: {},
     });
   }
 
-  function handleModifyTaskUpdate(productId, amount) {
+  function handleModifyTaskUpdate() {
     taskDispatch({
       type: "modify_task_update",
       payload: {},
     });
   }
 
-  function handleDeleteTaskUpdate(productId, amount) {
+  function handleDeleteTaskUpdate() {
     taskDispatch({
       type: "delete_task_update",
       payload: {},
     });
-
-    function generateUniqueTaskCategories() {
-      taskDispatch({
-        type: "generate_unique_task_list",
-        payload: {},
-      });
-    }
-
-    const taskValue = {
-      tasks: tasks,
-      createNewTask: handleCreateNewTask,
-      modifyTask: handleModifyTask,
-      deleteTask: handleDeleteTask,
-      changeTaskCategory: handleChangeTaskCategory,
-      addNewUpdate: handleAddNewUpdate,
-      modifyTaskUpdate: handleModifyTaskUpdate,
-      deleteTaskUpdate: handleDeleteTaskUpdate,
-      generateUniqueTaskCategories: generateUniqueTaskCategories,
-    };
-
-    return <TaskContext.Provider value={taskValue}>{children}</TaskContext.Provider>;
   }
-}
+
+  const taskValue = {
+    tasks: tasks,
+    createNewTask: handleCreateNewTask,
+    modifyTask: handleModifyTask,
+    deleteTask: handleDeleteTask,
+    changeTaskCategory: handleChangeTaskCategory,
+    addNewUpdate: handleAddNewUpdate,
+    modifyTaskUpdate: handleModifyTaskUpdate,
+    deleteTaskUpdate: handleDeleteTaskUpdate,
+  };
+
+
+
+  return <TaskContext.Provider value={taskValue}>{children}</TaskContext.Provider>;
+};

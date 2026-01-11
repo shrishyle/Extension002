@@ -40,7 +40,9 @@ const Container = () => {
           {tasks && (
             <table className="min-w-3.5 max-w-[90%] w-auto ">
               <TableHeader />
-              <TableBody data={tasks} taskCategory={activeCategory} />
+              <tbody>
+                <TableBody data={tasks} taskCategory={activeCategory} />
+              </tbody>
             </table>
           )}
         </div>

@@ -1,8 +1,9 @@
 import { createContext, useReducer } from "react";
+import React from "react";
 
 const formDisplayStatusObject = {
   showCreateNewTaskBtn: true,
-  showCreateNewTaskForm: false,
+  showCreateNewTaskForm: true,
   showModifyTaskBtn: false,
   showModifyTaskForm: false,
   showAddUpdateBtn: false,
@@ -12,26 +13,26 @@ const formDisplayStatusObject = {
 };
 
 export const FormDisplayContext = createContext({
-  formDisplayState: {},
-  show_create_new_task_btn: () => {},
-  hide_create_new_task_btn: () => {},
-  show_create_new_task_form: () => {},
-  hide_create_new_task_form: () => {},
-  show_modify_task_btn: () => {},
-  hide_modify_task_btn: () => {},
-  show_modify_task_form: () => {},
-  hide_modify_task_form: () => {},
-  show_add_update_btn: () => {},
-  hide_add_update_btn: () => {},
-  show_add_update_form: () => {},
-  hide_add_update_form: () => {},
-  show_modify_update_btn: () => {},
-  hide_modify_update_btn: () => {},
-  show_modify_update_form: () => {},
-  hide_modify_update_form: () => {},
+  formDisplay: {},
+  show_create_new_task_btn_func: () => {},
+  hide_create_new_task_btn_func: () => {},
+  show_create_new_task_form_func: () => {},
+  hide_create_new_task_form_func: () => {},
+  show_modify_task_btn_func: () => {},
+  hide_modify_task_btn_func: () => {},
+  show_modify_task_form_func: () => {},
+  hide_modify_task_form_func: () => {},
+  show_add_update_btn_func: () => {},
+  hide_add_update_btn_func: () => {},
+  show_add_update_form_func: () => {},
+  hide_add_update_form_func: () => {},
+  show_modify_update_btn_func: () => {},
+  hide_modify_update_btn_func: () => {},
+  show_modify_update_form_func: () => {},
+  hide_modify_update_form_func: () => {},
 });
 
-function formReducer({ state, action }) {
+function formReducer(state, action) {
   //1
   if (action.type === "show_create_new_task_btn") {
     return {
@@ -163,7 +164,7 @@ function formReducer({ state, action }) {
   return state;
 }
 
-export function FormDisplayContextProvider({ children }) {
+export const FormDisplayContextProvider = ({ children }) => {
   const [formDisplay, formDisplayDispatch] = useReducer(formReducer, formDisplayStatusObject);
 
   //1
@@ -294,25 +295,25 @@ export function FormDisplayContextProvider({ children }) {
     });
   }
 
-  const formDisplayValue = {
-    formDisplayState: formDisplay,
-    show_create_new_task_btn,
-    hide_create_new_task_btn,
-    show_create_new_task_form,
-    hide_create_new_task_form,
-    show_modify_task_btn,
-    hide_modify_task_btn,
-    show_modify_task_form,
-    hide_modify_task_form,
-    show_add_update_btn,
-    hide_add_update_btn,
-    show_add_update_form,
-    hide_add_update_form,
-    show_modify_update_btn,
-    hide_modify_update_btn,
-    show_modify_update_form,
-    hide_modify_update_form,
+  const value = {
+    formDisplay: formDisplay,
+    show_create_new_task_btn_func: show_create_new_task_btn,
+    hide_create_new_task_btn_func: hide_create_new_task_btn,
+    show_create_new_task_form_func: show_create_new_task_form,
+    hide_create_new_task_form_func: hide_create_new_task_form,
+    show_modify_task_btn_func: show_modify_task_btn,
+    hide_modify_task_btn_func: hide_modify_task_btn,
+    show_modify_task_form_func: show_modify_task_form,
+    hide_modify_task_form_func: hide_modify_task_form,
+    show_add_update_btn_func: show_add_update_btn,
+    hide_add_update_btn_func: hide_add_update_btn,
+    show_add_update_form_func: show_add_update_form,
+    hide_add_update_form_func: hide_add_update_form,
+    show_modify_update_btn_func: show_modify_update_btn,
+    hide_modify_update_btn_func: hide_modify_update_btn,
+    show_modify_update_form_func: show_modify_update_form,
+    hide_modify_update_form_func: hide_modify_update_form,
   };
 
-  return <FormDisplayContext.Provider value={formDisplayValue}>{children}</FormDisplayContext.Provider>;
-}
+  return <FormDisplayContext.Provider value={value}>{children}</FormDisplayContext.Provider>;
+};
