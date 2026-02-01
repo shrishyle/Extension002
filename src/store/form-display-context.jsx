@@ -3,7 +3,7 @@ import React from "react";
 
 const formDisplayStatusObject = {
   showCreateNewTaskBtn: true,
-  showCreateNewTaskForm: true,
+  showCreateNewTaskForm: false,
   showModifyTaskBtn: false,
   showModifyTaskForm: false,
   showAddUpdateBtn: false,
@@ -54,6 +54,7 @@ function formReducer(state, action) {
     return {
       ...state,
       showCreateNewTaskForm: true,
+      // showCreateNewTaskBtn: false,
     };
   }
 
