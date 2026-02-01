@@ -14,12 +14,12 @@ const CreateNewTaskForm = () => {
 
   return (
     <>
-      <div className="mb-2 text-center text-teal-50 flex flex-col  justify-center align-middle w-10/10 h-10 border bg-teal-600 rounded-sm">Create New Task</div>
+      <div className="w-full h-12 bg-teal-700 flex flex-col justify-center border mt-2 rounded-sm text-teal-50 text-center">Write New Task</div>
       <InputElement label={`New Task Title`} name={`New Task Title`} type={`text`} propClass={``} />
       <InputElement label={`Latest Action`} name={`Latest Action`} type={`text`} propClass={``} />
       <InputElement label={`Comments`} name={`Comments`} type={`text`} propClass={``} />
       <SelectionInputElement label={`Select Task Category`} id={`select_task_category`} taskCategories={uniqueTaskCategories} />
-      <Button type={`button`} propClasses={`mt-4`} label={`Save Task`} clickHandler={createNewTask} />
+      <Button type={`button`} propClasses={``} label={`Save Task`} clickHandler={createNewTask} />
       <Button type={`button`} propClasses={``} label={`Cancel`} clickHandler={hide_create_new_task_form_func} />
     </>
   );

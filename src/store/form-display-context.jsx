@@ -2,34 +2,42 @@ import { createContext, useReducer } from "react";
 import React from "react";
 
 const formDisplayStatusObject = {
+  // Buttons
   showCreateNewTaskBtn: true,
-  showCreateNewTaskForm: false,
   showModifyTaskBtn: false,
-  showModifyTaskForm: false,
   showAddUpdateBtn: false,
-  showAddUpdateForm: false,
   showModifyUpdateBtn: false,
+  // Forms
+  showCreateNewTaskForm: false,
+  showModifyTaskForm: false,
+  showAddUpdateForm: false,
   showModifyUpdateForm: false,
 };
 
 export const FormDisplayContext = createContext({
   formDisplay: {},
+  // Show Button
   show_create_new_task_btn_func: () => {},
-  hide_create_new_task_btn_func: () => {},
-  show_create_new_task_form_func: () => {},
-  hide_create_new_task_form_func: () => {},
   show_modify_task_btn_func: () => {},
-  hide_modify_task_btn_func: () => {},
-  show_modify_task_form_func: () => {},
-  hide_modify_task_form_func: () => {},
   show_add_update_btn_func: () => {},
-  hide_add_update_btn_func: () => {},
-  show_add_update_form_func: () => {},
-  hide_add_update_form_func: () => {},
   show_modify_update_btn_func: () => {},
+  // Hide Button
+  hide_create_new_task_btn_func: () => {},
+  hide_modify_task_btn_func: () => {},
+  hide_add_update_btn_func: () => {},
   hide_modify_update_btn_func: () => {},
+  // Show Form
+  show_create_new_task_form_func: () => {},
+  show_modify_task_form_func: () => {},
+  show_add_update_form_func: () => {},
   show_modify_update_form_func: () => {},
+  // Hide Form
+  hide_create_new_task_form_func: () => {},
+  hide_modify_task_form_func: () => {},
+  hide_add_update_form_func: () => {},
   hide_modify_update_form_func: () => {},
+  // Clear Sidebar
+  clearSidebar: () => {},
 });
 
 function formReducer(state, action) {
@@ -53,6 +61,7 @@ function formReducer(state, action) {
   if (action.type === "show_create_new_task_form") {
     return {
       ...state,
+      showCreateNewTaskBtn: false,
       showCreateNewTaskForm: true,
       // showCreateNewTaskBtn: false,
     };
@@ -62,6 +71,7 @@ function formReducer(state, action) {
   if (action.type === "hide_create_new_task_form") {
     return {
       ...state,
+      showCreateNewTaskBtn: true,
       showCreateNewTaskForm: false,
     };
   }
@@ -158,6 +168,20 @@ function formReducer(state, action) {
   if (action.type === "hide_modify_update_form") {
     return {
       ...state,
+      showModifyUpdateForm: false,
+    };
+  }
+
+  //17
+  if (action.type === "clear_sidebar") {
+    return {
+      showCreateNewTaskBtn: false,
+      showModifyTaskBtn: false,
+      showAddUpdateBtn: false,
+      showModifyUpdateBtn: false,
+      showCreateNewTaskForm: false,
+      showModifyTaskForm: false,
+      showAddUpdateForm: false,
       showModifyUpdateForm: false,
     };
   }
@@ -296,6 +320,14 @@ export const FormDisplayContextProvider = ({ children }) => {
     });
   }
 
+  //17
+  function clearSidebar() {
+    formDisplayDispatch({
+      type: "clear_sidebar",
+      //   payload: formDisplayStatusObject,
+    });
+  }
+
   const value = {
     formDisplay: formDisplay,
     show_create_new_task_btn_func: show_create_new_task_btn,
@@ -314,6 +346,7 @@ export const FormDisplayContextProvider = ({ children }) => {
     hide_modify_update_btn_func: hide_modify_update_btn,
     show_modify_update_form_func: show_modify_update_form,
     hide_modify_update_form_func: hide_modify_update_form,
+    clearSidebar: clearSidebar,
   };
 
   return <FormDisplayContext.Provider value={value}>{children}</FormDisplayContext.Provider>;
