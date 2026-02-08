@@ -1,5 +1,5 @@
-import { createContext, useReducer } from "react";
 import React from "react";
+import { createContext, useReducer } from "react";
 import { saveTasksToLocalStorage, getTasksFromLocalStorage } from "../APIs/api";
 
 export const TaskContext = createContext({
@@ -14,86 +14,109 @@ export const TaskContext = createContext({
 });
 
 function taskReducer(state, action) {
-  if (action.type === "create_new_task") {
-    //...
-  }
+  let updatedTasks;
 
-  if (action.type === "modify_task") {
-    //...
-  }
+  switch (action.type) {
+    case "create_new_task":
+      updatedTasks = [...state, action.payload];
+      saveTasksToLocalStorage(updatedTasks);
+      return updatedTasks;
 
-  if (action.type === "delete_task") {
-    //...
-  }
+    case "modify_task":
+      updatedTasks = state.map((task) => (task.id === action.payload.id ? { ...task, ...action.payload.updatedTask } : task));
+      saveTasksToLocalStorage(updatedTasks);
+      return updatedTasks;
 
-  if (action.type === "change_task_category") {
-    //...
-  }
+    case "delete_task":
+      updatedTasks = state.filter((task) => task.id !== action.payload.id);
+      saveTasksToLocalStorage(updatedTasks);
+      return updatedTasks;
 
-  if (action.type === "add_new_update") {
-    //...
-  }
+    case "change_task_category":
+      updatedTasks = state.map((task) => (task.id === action.payload.id ? { ...task, taskCategory: action.payload.category } : task));
+      saveTasksToLocalStorage(updatedTasks);
+      return updatedTasks;
 
-  if (action.type === "modify_task_update") {
-    //...
-  }
+    case "add_new_update":
+      updatedTasks = state.map((task) => (task.id === action.payload.id ? { ...task, taskUpdate: [...task.taskUpdate, action.payload.update] } : task));
+      saveTasksToLocalStorage(updatedTasks);
+      return updatedTasks;
 
-  if (action.type === "delete_task_update") {
-    //...
-  }
+    case "modify_task_update":
+      updatedTasks = state.map((task) => (task.id === action.payload.id ? { ...task, taskUpdate: task.taskUpdate.map((upd, i) => (i === action.payload.updateIndex ? action.payload.updatedUpdate : upd)) } : task));
+      saveTasksToLocalStorage(updatedTasks);
+      return updatedTasks;
 
-  return state;
+    case "delete_task_update":
+      updatedTasks = state.map((task) => (task.id === action.payload.id ? { ...task, taskUpdate: task.taskUpdate.filter((_, i) => i !== action.payload.updateIndex) } : task));
+      saveTasksToLocalStorage(updatedTasks);
+      return updatedTasks;
+
+    default:
+      return state;
+  }
 }
 
 export const TaskContextProvider = ({ children }) => {
-  const [tasks, taskDispatch] = useReducer(taskReducer, getTasksFromLocalStorage());
+  const initialTasks = getTasksFromLocalStorage().map((task) => ({
+    ...task,
+    id: task.id || crypto.randomUUID(),
+  }));
+  const [tasks, taskDispatch] = useReducer(taskReducer, initialTasks);
 
-  function handleCreateNewTask(id) {
+  function handleCreateNewTask(formData) {
+    const newTask = {
+      id: crypto.randomUUID(),
+      taskDescription: formData.title,
+      taskCategory: formData.taskCategory,
+      taskUpdate: [[new Date().toLocaleDateString(), formData.latestAction, formData.comments]],
+    };
+
     taskDispatch({
       type: "create_new_task",
-      payload: id,
+      payload: newTask,
     });
   }
 
-  function handleModifyTask() {
-    taskDispatch({
-      type: "modify_task",
-      payload: {},
-    });
-  }
-
-  function handleDeleteTask() {
+  function handleDeleteTask(id) {
     taskDispatch({
       type: "delete_task",
-      payload: {},
+      payload: { id },
     });
   }
 
-  function handleChangeTaskCategory() {
+  function handleModifyTask(id, updatedTask) {
+    taskDispatch({
+      type: "modify_task",
+      payload: { id, updatedTask },
+    });
+  }
+
+  function handleChangeTaskCategory(id, category) {
     taskDispatch({
       type: "change_task_category",
-      payload: {},
+      payload: { id, category },
     });
   }
 
-  function handleAddNewUpdate() {
+  function handleAddNewUpdate(id, update) {
     taskDispatch({
       type: "add_new_update",
-      payload: {},
+      payload: { id, update },
     });
   }
 
-  function handleModifyTaskUpdate() {
+  function handleModifyTaskUpdate(id, updateIndex, updatedUpdate) {
     taskDispatch({
       type: "modify_task_update",
-      payload: {},
+      payload: { id, updateIndex, updatedUpdate },
     });
   }
 
-  function handleDeleteTaskUpdate() {
+  function handleDeleteTaskUpdate(id, updateIndex) {
     taskDispatch({
       type: "delete_task_update",
-      payload: {},
+      payload: { id, updateIndex },
     });
   }
 
