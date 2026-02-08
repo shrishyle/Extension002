@@ -1,13 +1,14 @@
 import InputElement from "../InputElement";
 import SelectionInputElement from "../SelectionInputElement";
 import Button from "../Button";
-import { useContext, useState } from "react";
-import { TaskContext } from "../../store/task-context-0";
+import { useContext, useState, useMemo } from "react";
+import { TaskContext } from "../../store/task-context";
 import { FormDisplayContext } from "../../store/form-display-context";
 import React from "react";
 
 const CreateNewTaskForm = () => {
   const { createNewTask, tasks } = useContext(TaskContext);
+  console.log(tasks);
   const { hide_create_new_task_form_func } = useContext(FormDisplayContext);
 
   const [formData, setFormData] = useState({
@@ -17,7 +18,10 @@ const CreateNewTaskForm = () => {
     taskCategory: "",
   });
 
-  const uniqueTaskCategories = [...new Set(tasks.map((task) => task.taskCategory))];
+  const uniqueTaskCategories = useMemo(() => {
+    return tasks?.length ? [...new Set(tasks.map((task) => task.taskCategory))] : [];
+  }, [tasks]);
+  console.log("Categories:", uniqueTaskCategories);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,17 +34,23 @@ const CreateNewTaskForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     createNewTask(formData);
+    setFormData({
+      title: "",
+      latestAction: "",
+      comments: "",
+      taskCategory: "",
+    });
   };
 
   return (
     <>
       <form onSubmit={handleSubmit}>
         <div className="w-full h-12 bg-teal-700 flex flex-col justify-center border mt-2 rounded-sm text-teal-50 text-center">Write New Task</div>
-        <InputElement label={`New Task Title`} name={`New Task Title`} type={`text`} propClass={``} value={formData.title} onChange={handleChange} />
-        <InputElement label={`Latest Action`} name={`Latest Action`} type={`text`} propClass={``} value={formData.latestAction} onChange={handleChange} />
-        <InputElement label={`Comments`} name={`Comments`} type={`text`} propClass={``} value={formData.comments} onChange={handleChange} />
-        <SelectionInputElement label={`Select Task Category`} id={`select_task_category`} taskCategories={uniqueTaskCategories} onChange={handleChange} />
-        <Button type={`submit`} propClasses={``} label={`Save Task`} />
+        <InputElement label={`New Task Title`} name={`title`} type={`text`} propClass={``} value={formData.title} onChange={handleChange} />
+        <InputElement label={`Latest Action`} name={`latestAction`} type={`text`} propClass={``} value={formData.latestAction} onChange={handleChange} />
+        <InputElement label={`Comments`} name={`comments`} type={`text`} propClass={``} value={formData.comments} onChange={handleChange} />
+        <SelectionInputElement label="Select Task Category" name="taskCategory" value={formData.taskCategory} taskCategories={uniqueTaskCategories} onChange={handleChange} />
+        <Button type={`submit`} propClasses={``} label={`Save Task`} disabled={!formData.title || !formData.taskCategory} />
         <Button type={`button`} propClasses={``} label={`Cancel`} clickHandler={hide_create_new_task_form_func} />
       </form>
     </>

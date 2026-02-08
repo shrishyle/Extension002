@@ -62,7 +62,9 @@ export const TaskContextProvider = ({ children }) => {
     ...task,
     id: task.id || crypto.randomUUID(),
   }));
+
   const [tasks, taskDispatch] = useReducer(taskReducer, initialTasks);
+  console.log("Tasks: ", tasks);
 
   function handleCreateNewTask(formData) {
     const newTask = {
@@ -130,6 +132,8 @@ export const TaskContextProvider = ({ children }) => {
     modifyTaskUpdate: handleModifyTaskUpdate,
     deleteTaskUpdate: handleDeleteTaskUpdate,
   };
+
+  console.log(tasks);
 
   return <TaskContext.Provider value={taskValue}>{children}</TaskContext.Provider>;
 };
