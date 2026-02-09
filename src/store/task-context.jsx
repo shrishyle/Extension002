@@ -64,7 +64,7 @@ export const TaskContextProvider = ({ children }) => {
   }));
 
   const [tasks, taskDispatch] = useReducer(taskReducer, initialTasks);
-  console.log("Tasks: ", tasks);
+
 
   function handleCreateNewTask(formData) {
     const newTask = {
@@ -133,7 +133,6 @@ export const TaskContextProvider = ({ children }) => {
     deleteTaskUpdate: handleDeleteTaskUpdate,
   };
 
-  console.log(tasks);
 
   return <TaskContext.Provider value={taskValue}>{children}</TaskContext.Provider>;
 };

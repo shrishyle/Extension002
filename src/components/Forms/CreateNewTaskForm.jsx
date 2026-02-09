@@ -8,7 +8,7 @@ import React from "react";
 
 const CreateNewTaskForm = () => {
   const { createNewTask, tasks } = useContext(TaskContext);
-  const { hide_create_new_task_form_func } = useContext(FormDisplayContext);
+  const { hide_create_new_task_form_func, clearSidebar } = useContext(FormDisplayContext);
 
   const [formData, setFormData] = useState({
     title: "",
@@ -49,7 +49,7 @@ const CreateNewTaskForm = () => {
         <InputElement label={`Comments`} name={`comments`} type={`text`} propClass={``} value={formData.comments} onChange={handleChange} />
         <SelectionInputElement label="Select Task Category" name="taskCategory" value={formData.taskCategory} taskCategories={uniqueTaskCategories} onChange={handleChange} />
         <Button type={`submit`} propClasses={``} label={`Save Task`} disabled={!formData.title || !formData.taskCategory} />
-        <Button type={`button`} propClasses={``} label={`Cancel`} clickHandler={hide_create_new_task_form_func} />
+        <Button type={`button`} propClasses={``} label={`Cancel`} clickHandler={clearSidebar} />
       </form>
     </>
   );
