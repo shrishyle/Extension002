@@ -2,6 +2,8 @@ import { createContext, useReducer } from "react";
 import React from "react";
 
 const formDisplayStatusObject = {
+  // Active Panel
+  // activePanel: null | "CREATE_TASK" | "MODIFY_TASK" | "ADD_UPDATE" | "MODIFY_UPDATE",
   // Buttons
   showCreateNewTaskBtn: true,
   showModifyTaskBtn: false,
@@ -49,7 +51,7 @@ function formReducer(state, action) {
   }
 
   if (action.type === "CLEAR") {
-    return {...formDisplayStatusObject};
+    return { ...formDisplayStatusObject };
   }
 
   return state;
@@ -81,6 +83,15 @@ export const FormDisplayContextProvider = ({ children }) => {
     show_modify_update_btn_func: () => setDisplay({ showModifyUpdateBtn: true }),
     hide_modify_update_btn_func: () => setDisplay({ showModifyUpdateBtn: false }),
     // forms
+    // show_create_new_task_form_func: () => setDisplay({ showCreateNewTaskForm: true, showCreateNewTaskBtn: false }),
+    // hide_create_new_task_form_func: () => setDisplay({ showCreateNewTaskForm: false, showCreateNewTaskBtn: true }),
+    // show_modify_task_form_func: () => setDisplay({ showModifyTaskForm: true }),
+    // hide_modify_task_form_func: () => setDisplay({ showModifyTaskForm: false }),
+    // show_add_update_form_func: () => setDisplay({ showAddUpdateForm: true }),
+    // hide_add_update_form_func: () => setDisplay({ showAddUpdateForm: false }),
+    // show_modify_update_form_func: () => setDisplay({ showModifyUpdateForm: true }),
+    // hide_modify_update_form_func: () => setDisplay({ showModifyUpdateForm: false }),
+
     show_create_new_task_form_func: () => setDisplay({ showCreateNewTaskForm: true, showCreateNewTaskBtn: false }),
     hide_create_new_task_form_func: () => setDisplay({ showCreateNewTaskForm: false, showCreateNewTaskBtn: true }),
     show_modify_task_form_func: () => setDisplay({ showModifyTaskForm: true }),
@@ -90,6 +101,11 @@ export const FormDisplayContextProvider = ({ children }) => {
     show_modify_update_form_func: () => setDisplay({ showModifyUpdateForm: true }),
     hide_modify_update_form_func: () => setDisplay({ showModifyUpdateForm: false }),
     clearSidebar,
+    // show_create_new_task_form_func: () => setDisplay({ activePanel: "CREATE_TASK", showCreateNewTaskBtn: false }),
+    // show_modify_task_form_func: () => setDisplay({ activePanel: "MODIFY" }),
+    // show_add_update_form_func: () => setDisplay({ activePanel: "ADD_UPDATE" }),
+    // show_modify_update_form_func: () => setDisplay({ activePanel: "MODIFY_UPDATE" }),
+    // clearSidebar: () => dispatch({ type: "CLEAR" }),
   };
 
   return <FormDisplayContext.Provider value={value}>{children}</FormDisplayContext.Provider>;

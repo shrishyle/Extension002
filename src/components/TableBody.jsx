@@ -3,10 +3,17 @@ import { FormDisplayContext } from "../store/form-display-context";
 import { TaskContext } from "../store/task-context";
 
 const TableBody = ({ data, taskCategory }) => {
-  const { show_modify_task_btn_func, show_add_update_btn_func, show_modify_update_btn_func, clearSidebar } = useContext(FormDisplayContext);
+  const { show_modify_task_btn_func, show_add_update_btn_func, show_modify_update_btn_func, hide_create_new_task_btn_func, clearSidebar } = useContext(FormDisplayContext);
 
   let taskToDisplay = data.filter((task) => task.taskCategory === taskCategory);
   let defaultCalsses = "border cursor-pointer border-gray-300";
+
+  let btnDisplayFunc = () => {
+    clearSidebar();
+    hide_create_new_task_btn_func();
+    show_add_update_btn_func();
+    show_modify_update_btn_func();
+  };
 
   return (
     <>
@@ -21,6 +28,7 @@ const TableBody = ({ data, taskCategory }) => {
               className={`pr-3 pl-3 ${defaultCalsses}`}
               onClick={() => {
                 clearSidebar();
+                hide_create_new_task_btn_func();
                 show_add_update_btn_func();
                 show_modify_task_btn_func();
               }}
@@ -30,34 +38,13 @@ const TableBody = ({ data, taskCategory }) => {
           </tr>
           {task.taskUpdate.map((update, updateIndex) => (
             <tr key={`${taskIndex}${updateIndex}8`}>
-              <td
-                className={`text-center pr-2 pl-2 ${defaultCalsses}`}
-                onClick={() => {
-                  clearSidebar();
-                  show_add_update_btn_func();
-                  show_modify_update_btn_func();
-                }}
-              >
+              <td className={`text-center pr-2 pl-2 ${defaultCalsses}`} onClick={btnDisplayFunc}>
                 {update[0]}
               </td>
-              <td
-                className={`pr-2 pl-2 ${defaultCalsses}`}
-                onClick={() => {
-                  clearSidebar();
-                  show_add_update_btn_func();
-                  show_modify_update_btn_func();
-                }}
-              >
+              <td className={`pr-2 pl-2 ${defaultCalsses}`} onClick={btnDisplayFunc}>
                 {update[1]}
               </td>
-              <td
-                className={`pr-2 pl-2 ${defaultCalsses}`}
-                onClick={() => {
-                  clearSidebar();
-                  show_add_update_btn_func();
-                  show_modify_update_btn_func();
-                }}
-              >
+              <td className={`pr-2 pl-2 ${defaultCalsses}`} onClick={btnDisplayFunc}>
                 {update[2]}
               </td>
             </tr>
