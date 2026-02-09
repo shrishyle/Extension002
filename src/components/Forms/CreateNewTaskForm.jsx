@@ -8,18 +8,17 @@ import React from "react";
 
 const CreateNewTaskForm = () => {
   const { createNewTask, tasks } = useContext(TaskContext);
-  const { hide_create_new_task_form_func, clearSidebar } = useContext(FormDisplayContext);
+  const { clearSidebar } = useContext(FormDisplayContext);
 
   const [formData, setFormData] = useState({
     title: "",
     latestAction: "",
     comments: "",
     taskCategory: "",
+    newCategory: "",
   });
 
-  const uniqueTaskCategories = useMemo(() => {
-    return tasks?.length ? [...new Set(tasks.map((task) => task.taskCategory))] : [];
-  }, [tasks]);
+  const uniqueTaskCategories = [...new Set(tasks.map((task) => task.taskCategory))];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,6 +29,7 @@ const CreateNewTaskForm = () => {
   };
 
   const handleSubmit = (e) => {
+    console.log(formData);
     e.preventDefault();
     createNewTask(formData);
     setFormData({
@@ -37,6 +37,7 @@ const CreateNewTaskForm = () => {
       latestAction: "",
       comments: "",
       taskCategory: "",
+      newCategory: "",
     });
   };
 
@@ -48,6 +49,7 @@ const CreateNewTaskForm = () => {
         <InputElement label={`Latest Action`} name={`latestAction`} type={`text`} propClass={``} value={formData.latestAction} onChange={handleChange} />
         <InputElement label={`Comments`} name={`comments`} type={`text`} propClass={``} value={formData.comments} onChange={handleChange} />
         <SelectionInputElement label="Select Task Category" name="taskCategory" value={formData.taskCategory} taskCategories={uniqueTaskCategories} onChange={handleChange} />
+        {formData.taskCategory === "create_new_category" && <InputElement label="New Category Name" name="newCategory" type="text" value={formData.newCategory} onChange={handleChange} />}
         <Button type={`submit`} propClasses={``} label={`Save Task`} disabled={!formData.title || !formData.taskCategory} />
         <Button type={`button`} propClasses={``} label={`Cancel`} clickHandler={clearSidebar} />
       </form>

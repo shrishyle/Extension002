@@ -65,12 +65,11 @@ export const TaskContextProvider = ({ children }) => {
 
   const [tasks, taskDispatch] = useReducer(taskReducer, initialTasks);
 
-
   function handleCreateNewTask(formData) {
     const newTask = {
       id: crypto.randomUUID(),
       taskDescription: formData.title,
-      taskCategory: formData.taskCategory,
+      taskCategory: formData.taskCategory === "create_new_category" ? formData.newCategory : formData.taskCategory,
       taskUpdate: [[new Date().toLocaleDateString(), formData.latestAction, formData.comments]],
     };
 
@@ -132,7 +131,6 @@ export const TaskContextProvider = ({ children }) => {
     modifyTaskUpdate: handleModifyTaskUpdate,
     deleteTaskUpdate: handleDeleteTaskUpdate,
   };
-
 
   return <TaskContext.Provider value={taskValue}>{children}</TaskContext.Provider>;
 };

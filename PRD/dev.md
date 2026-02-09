@@ -2,6 +2,7 @@
 
 
 ### Issues to be resolved.
+0. Create New Task Button must have feature to ad new task to new category.
 1. Wire up all the functionalities
 2. In the create New task form, add feature to create a new task-category.
 3. In modify-update function, define task status - completion, archive, work-in-process feature.
