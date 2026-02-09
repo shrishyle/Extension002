@@ -82,11 +82,11 @@ export const FormDisplayContextProvider = ({ children }) => {
     // forms
     show_create_new_task_form_func: () => setDisplay({ showCreateNewTaskForm: true, showCreateNewTaskBtn: false }),
     hide_create_new_task_form_func: () => setDisplay({ showCreateNewTaskForm: false, showCreateNewTaskBtn: true }),
-    show_modify_task_form_func: () => setDisplay({ showModifyTaskForm: true }),
+    show_modify_task_form_func: () => setDisplay({ showModifyTaskForm: true, showCreateNewTaskBtn: false }),
     hide_modify_task_form_func: () => setDisplay({ showModifyTaskForm: false }),
-    show_add_update_form_func: () => setDisplay({ showAddUpdateForm: true }),
+    show_add_update_form_func: () => setDisplay({ showAddUpdateForm: true, showCreateNewTaskBtn: false }),
     hide_add_update_form_func: () => setDisplay({ showAddUpdateForm: false }),
-    show_modify_update_form_func: () => setDisplay({ showModifyUpdateForm: true }),
+    show_modify_update_form_func: () => setDisplay({ showModifyUpdateForm: true, showCreateNewTaskBtn: false }),
     hide_modify_update_form_func: () => setDisplay({ showModifyUpdateForm: false }),
     clearSidebar,
   };
