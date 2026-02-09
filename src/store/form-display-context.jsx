@@ -1,19 +1,6 @@
 import { createContext, useReducer } from "react";
 import React from "react";
 
-const defaultState = {
-  // Buttons
-  showCreateNewTaskBtn: true,
-  showModifyTaskBtn: false,
-  showAddUpdateBtn: false,
-  showModifyUpdateBtn: false,
-  // Forms
-  showCreateNewTaskForm: false,
-  showModifyTaskForm: false,
-  showAddUpdateForm: false,
-  showModifyUpdateForm: false,
-};
-
 const formDisplayStatusObject = {
   // Buttons
   showCreateNewTaskBtn: true,
@@ -62,7 +49,7 @@ function formReducer(state, action) {
   }
 
   if (action.type === "CLEAR") {
-    return defaultState;
+    return {...formDisplayStatusObject};
   }
 
   return state;
