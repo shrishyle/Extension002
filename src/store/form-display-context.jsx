@@ -12,6 +12,8 @@ const formDisplayStatusObject = {
   showModifyTaskForm: false,
   showAddUpdateForm: false,
   showModifyUpdateForm: false,
+  // Others
+  selectedTaskId: null,
 };
 
 export const FormDisplayContext = createContext({
@@ -58,6 +60,7 @@ export const FormDisplayContextProvider = ({ children }) => {
   const [formDisplay, dispatch] = useReducer(formReducer, formDisplayStatusObject);
 
   function setDisplay(payload) {
+    console.log("selectedTaskId: ", payload.selectedTaskId);
     dispatch({
       type: "SET",
       payload,
@@ -73,21 +76,21 @@ export const FormDisplayContextProvider = ({ children }) => {
     // buttons
     show_create_new_task_btn_func: () => setDisplay({ showCreateNewTaskBtn: true }),
     hide_create_new_task_btn_func: () => setDisplay({ showCreateNewTaskBtn: false }),
-    show_modify_task_btn_func: () => setDisplay({ showModifyTaskBtn: true }),
+    show_modify_task_btn_func: (taskId) => setDisplay({ showModifyTaskBtn: true, selectedTaskId: taskId }),
     hide_modify_task_btn_func: () => setDisplay({ showModifyTaskBtn: false }),
     show_add_update_btn_func: () => setDisplay({ showAddUpdateBtn: true }),
     hide_add_update_btn_func: () => setDisplay({ showAddUpdateBtn: false }),
     show_modify_update_btn_func: () => setDisplay({ showModifyUpdateBtn: true }),
     hide_modify_update_btn_func: () => setDisplay({ showModifyUpdateBtn: false }),
     // forms
-    show_create_new_task_form_func: () => setDisplay({ showCreateNewTaskForm: true, showCreateNewTaskBtn: false }),
-    hide_create_new_task_form_func: () => setDisplay({ showCreateNewTaskForm: false, showCreateNewTaskBtn: true }),
-    show_modify_task_form_func: () => setDisplay({ showModifyTaskForm: true, showCreateNewTaskBtn: false }),
-    hide_modify_task_form_func: () => setDisplay({ showModifyTaskForm: false }),
-    show_add_update_form_func: () => setDisplay({ showAddUpdateForm: true, showCreateNewTaskBtn: false }),
-    hide_add_update_form_func: () => setDisplay({ showAddUpdateForm: false }),
-    show_modify_update_form_func: () => setDisplay({ showModifyUpdateForm: true, showCreateNewTaskBtn: false }),
-    hide_modify_update_form_func: () => setDisplay({ showModifyUpdateForm: false }),
+    show_create_new_task_form_func: () => setDisplay({ showCreateNewTaskForm: true, showCreateNewTaskBtn: false, showModifyTaskBtn: false, showAddUpdateBtn: false, showModifyUpdateBtn: false }),
+    hide_create_new_task_form_func: () => setDisplay({ showCreateNewTaskForm: false, showCreateNewTaskBtn: true, showModifyTaskBtn: false, showAddUpdateBtn: false, showModifyUpdateBtn: false }),
+    show_modify_task_form_func: () => setDisplay({ showModifyTaskForm: true, showCreateNewTaskBtn: false, showModifyTaskBtn: false, showAddUpdateBtn: false, showModifyUpdateBtn: false }),
+    hide_modify_task_form_func: () => setDisplay({ showModifyTaskForm: false, showCreateNewTaskBtn: true, showModifyTaskBtn: false, showAddUpdateBtn: false, showModifyUpdateBtn: false }),
+    show_add_update_form_func: () => setDisplay({ showAddUpdateForm: true, showCreateNewTaskBtn: false, showModifyTaskBtn: false, showAddUpdateBtn: false, showModifyUpdateBtn: false }),
+    hide_add_update_form_func: () => setDisplay({ showAddUpdateForm: false, showCreateNewTaskBtn: true, showModifyTaskBtn: false, showAddUpdateBtn: false, showModifyUpdateBtn: false }),
+    show_modify_update_form_func: () => setDisplay({ showModifyUpdateForm: true, showCreateNewTaskBtn: false, showModifyTaskBtn: false, showAddUpdateBtn: false, showModifyUpdateBtn: false }),
+    hide_modify_update_form_func: () => setDisplay({ showModifyUpdateForm: false, showCreateNewTaskBtn: true, showModifyTaskBtn: false, showAddUpdateBtn: false, showModifyUpdateBtn: false }),
     clearSidebar,
   };
 

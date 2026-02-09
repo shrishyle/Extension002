@@ -6,11 +6,11 @@ import { FormDisplayContextProvider } from "./store/form-display-context";
 function App() {
   return (
     <>
-      <TaskContextProvider>
-        <FormDisplayContextProvider>
+      <FormDisplayContextProvider>
+        <TaskContextProvider>
           <Container />
-        </FormDisplayContextProvider>
-      </TaskContextProvider>
+        </TaskContextProvider>
+      </FormDisplayContextProvider>
     </>
   );
 }

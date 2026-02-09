@@ -29,8 +29,8 @@ const TableBody = ({ data, taskCategory }) => {
               onClick={() => {
                 clearSidebar();
                 hide_create_new_task_btn_func();
-                show_add_update_btn_func();
-                show_modify_task_btn_func();
+                show_add_update_btn_func(task.id);
+                show_modify_task_btn_func(task.id);
               }}
             >
               {task.taskDescription}
