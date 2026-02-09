@@ -8,7 +8,6 @@ import React from "react";
 
 const CreateNewTaskForm = () => {
   const { createNewTask, tasks } = useContext(TaskContext);
-  console.log(tasks);
   const { hide_create_new_task_form_func } = useContext(FormDisplayContext);
 
   const [formData, setFormData] = useState({
@@ -21,7 +20,6 @@ const CreateNewTaskForm = () => {
   const uniqueTaskCategories = useMemo(() => {
     return tasks?.length ? [...new Set(tasks.map((task) => task.taskCategory))] : [];
   }, [tasks]);
-  console.log("Categories:", uniqueTaskCategories);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

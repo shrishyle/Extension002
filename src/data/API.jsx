@@ -1,5 +1,3 @@
-
-
 let taskData = [
   {
     taskDescription: "Appointment of Internal Auditor",
@@ -57,7 +55,7 @@ let taskData = [
     ],
   },
 
-    {
+  {
     taskDescription: "Handover of KK Society",
     taskCategory: "Koparkhairane Property",
     taskUpdate: [
