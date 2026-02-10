@@ -9,3 +9,4 @@
 4. Install the Header or Navigationn bar to the application
 5. Develop the authorisation feature
 6. Migrate the app to use other UI framework like 
+7. Dvvelop feature to delete update

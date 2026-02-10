@@ -9,11 +9,11 @@ const TableBody = ({ taskCategory }) => {
   let taskToDisplay = tasks.filter((task) => task.taskCategory === taskCategory);
   let defaultClasses = "border cursor-pointer border-gray-300";
 
-  let btnDisplayFunc = () => {
-    clearSidebar();
+  let btnDisplayFunc = (taskId, updateId) => {
+    // clearSidebar();
     hide_create_new_task_btn_func();
-    show_add_update_btn_func();
-    show_modify_update_btn_func();
+    show_add_update_btn_func(taskId, updateId);
+    show_modify_update_btn_func(taskId, updateId);
   };
 
   return (
@@ -38,13 +38,13 @@ const TableBody = ({ taskCategory }) => {
           </tr>
           {task.taskUpdate.map((update, updateIndex) => (
             <tr key={`${taskIndex}${updateIndex}8`}>
-              <td className={`text-center pr-2 pl-2 ${defaultClasses}`} onClick={btnDisplayFunc}>
+              <td className={`text-center pr-2 pl-2 ${defaultClasses}`} onClick={() => btnDisplayFunc(task.id, update.id)}>
                 {update.date}
               </td>
-              <td className={`pr-2 pl-2 ${defaultClasses}`} onClick={btnDisplayFunc}>
+              <td className={`pr-2 pl-2 ${defaultClasses}`} onClick={() => btnDisplayFunc(task.id, update.id)}>
                 {update.action}
               </td>
-              <td className={`pr-2 pl-2 ${defaultClasses}`} onClick={btnDisplayFunc}>
+              <td className={`pr-2 pl-2 ${defaultClasses}`} onClick={() => btnDisplayFunc(task.id, update.id)}>
                 {update.comments}
               </td>
             </tr>

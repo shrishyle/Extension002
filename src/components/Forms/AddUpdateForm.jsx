@@ -1,27 +1,62 @@
+import React from "react";
 import Button from "../Button";
 import InputElement from "../InputElement";
 import { FormDisplayContext } from "../../store/form-display-context";
-import { useContext } from "react";
-import React from "react";
+import { useContext, useState } from "react";
+import { TaskContext } from "../../store/task-context";
 
 const AddUpdateForm = () => {
-  const { clearSidebar, show_create_new_task_btn_func } = useContext(FormDisplayContext);
+  const { clearSidebar, show_create_new_task_btn_func, formDisplay } = useContext(FormDisplayContext);
+  const { tasks, addNewUpdate } = useContext(TaskContext);
+  const { selectedTaskId, selectedUpdateId } = formDisplay;
+
+  const taskId = formDisplay.selectedTaskId;
+  const selectedTask = tasks.find((task) => task.id === taskId);
+  const selectedUpdate = selectedTask.taskUpdate.find((update) => update.id === selectedUpdateId);
+  const { action, comments } = selectedUpdate;
+
+  const [formData, setFormData] = useState({
+    latestAction: action,
+    comments: comments,
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    addNewUpdate(selectedTaskId, {
+      id: crypto.randomUUID(),
+      date: new Date().toLocaleDateString(),
+      action: formData.latestAction,
+      comments: formData.comments,
+    });
+    clearSidebar();
+    show_create_new_task_btn_func();
+  };
 
   return (
     <>
-      <div className="w-full h-12 bg-teal-700 flex flex-col justify-center border mt-2 rounded-sm text-teal-50 text-center">Add Update</div>
-      <InputElement label={`Task Title`} name={`Task Title`} type={`text`} propClass={``} />
-      <InputElement label={`Task Title`} name={`Task Title`} type={`text`} propClass={``} />
-      <Button type={`button`} propClasses={``} label={`Add Update`} clickHandler="" />
-      <Button
-        type={`button`}
-        propClasses={``}
-        label={`Cancel`}
-        clickHandler={() => {
-          clearSidebar();
-          show_create_new_task_btn_func();
-        }}
-      />
+      <form onSubmit={handleSubmit}>
+        <div className="w-full h-12 bg-teal-700 flex flex-col justify-center border mt-2 rounded-sm text-teal-50 text-center">Add Update</div>
+        <InputElement label={`Task Update`} name={`task_update`} type={`text`} propClass={``}  onChange={handleChange} />
+        <InputElement label={`Comments`} name={`comments`} type={`text`} propClass={``} onChange={handleChange} />
+        <Button type={`submit`} propClasses={``} label={`Add Update`} clickHandler="" />
+        <Button
+          type={`button`}
+          propClasses={``}
+          label={`Cancel`}
+          clickHandler={() => {
+            clearSidebar();
+            show_create_new_task_btn_func();
+          }}
+        />
+      </form>
     </>
   );
 };

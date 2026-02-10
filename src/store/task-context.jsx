@@ -58,22 +58,21 @@ function taskReducer(state, action) {
 }
 
 export const TaskContextProvider = ({ children }) => {
-  const initialTasks = getTasksFromLocalStorage().map((task) => ({
+  function normalizeTasks(rawTasks) {
+  return rawTasks.map((task) => ({
     ...task,
-    id: task.id || crypto.randomUUID(),
-    taskUpdate: task.taskUpdate.map((update) => {
-      // If already upgraded, keep it
-      if (typeof update === "object" && update.id) return update;
+    id: task.id ?? crypto.randomUUID(),
 
-      // Convert old array format to object with id
-      return {
-        id: crypto.randomUUID(),
-        date: update[0],
-        action: update[1],
-        comments: update[2],
-      };
-    }),
+    taskUpdate: (task.taskUpdate || []).map((update) => ({
+      ...update,
+      id: update.id ?? crypto.randomUUID(),
+    })),
   }));
+}
+
+const rawTasks = getTasksFromLocalStorage();
+const initialTasks = normalizeTasks(rawTasks);
+
 
   const [tasks, taskDispatch] = useReducer(taskReducer, initialTasks);
 
