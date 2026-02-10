@@ -61,7 +61,6 @@ export const TaskContextProvider = ({ children }) => {
   const initialTasks = getTasksFromLocalStorage().map((task) => ({
     ...task,
     id: task.id || crypto.randomUUID(),
-
     taskUpdate: task.taskUpdate.map((update) => {
       // If already upgraded, keep it
       if (typeof update === "object" && update.id) return update;
@@ -83,7 +82,8 @@ export const TaskContextProvider = ({ children }) => {
       id: crypto.randomUUID(),
       taskDescription: formData.title,
       taskCategory: formData.taskCategory === "Create New Category" ? formData.newCategory : formData.taskCategory,
-      taskUpdate: [[new Date().toLocaleDateString(), formData.latestAction, formData.comments]],
+      taskUpdate: [{ id: crypto.randomUUID(), date: new Date().toLocaleDateString(), action: formData.latestAction, comments: formData.comments }],
+      progressStatus: "work-in-process",
     };
 
     taskDispatch({

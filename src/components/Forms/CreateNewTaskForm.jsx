@@ -16,6 +16,7 @@ const CreateNewTaskForm = () => {
     comments: "",
     taskCategory: "",
     newCategory: "",
+    progressStatus: "work-in-process",
   });
 
   const uniqueTaskCategories = [...new Set(tasks.map((task) => task.taskCategory))];
@@ -39,6 +40,7 @@ const CreateNewTaskForm = () => {
       taskCategory: "",
       newCategory: "",
     });
+    clearSidebar();
   };
 
   return (
