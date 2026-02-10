@@ -60,7 +60,6 @@ export const FormDisplayContextProvider = ({ children }) => {
   const [formDisplay, dispatch] = useReducer(formReducer, formDisplayStatusObject);
 
   function setDisplay(payload) {
-    console.log("selectedTaskId: ", payload.selectedTaskId);
     dispatch({
       type: "SET",
       payload,

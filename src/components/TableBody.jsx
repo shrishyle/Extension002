@@ -39,7 +39,6 @@ const TableBody = ({ taskCategory }) => {
           {task.taskUpdate.map((update, updateIndex) => (
             <tr key={`${taskIndex}${updateIndex}8`}>
               <td className={`text-center pr-2 pl-2 ${defaultClasses}`} onClick={btnDisplayFunc}>
-                {console.log("i am rendering")}
                 {update.date}
               </td>
               <td className={`pr-2 pl-2 ${defaultClasses}`} onClick={btnDisplayFunc}>
