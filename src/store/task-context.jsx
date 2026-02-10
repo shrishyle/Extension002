@@ -22,13 +22,13 @@ function taskReducer(state, action) {
       saveTasksToLocalStorage(updatedTasks);
       return updatedTasks;
 
-    case "modify_task":
-      updatedTasks = state.map((task) => (task.id === action.payload.id ? { ...task, ...action.payload.updatedTask } : task));
+    case "delete_task":
+      updatedTasks = state.filter((task) => task.id !== action.payload.id);
       saveTasksToLocalStorage(updatedTasks);
       return updatedTasks;
 
-    case "delete_task":
-      updatedTasks = state.filter((task) => task.id !== action.payload.id);
+    case "modify_task":
+      updatedTasks = state.map((task) => (task.id === action.payload.id ? { ...task, ...action.payload.updatedTask } : task));
       saveTasksToLocalStorage(updatedTasks);
       return updatedTasks;
 
