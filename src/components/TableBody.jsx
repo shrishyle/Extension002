@@ -38,13 +38,13 @@ const TableBody = ({ data, taskCategory }) => {
           {task.taskUpdate.map((update, updateIndex) => (
             <tr key={`${taskIndex}${updateIndex}8`}>
               <td className={`text-center pr-2 pl-2 ${defaultCalsses}`} onClick={btnDisplayFunc}>
-                {update[0]}
+                {update.date}
               </td>
               <td className={`pr-2 pl-2 ${defaultCalsses}`} onClick={btnDisplayFunc}>
-                {update[1]}
+                {update.action}
               </td>
               <td className={`pr-2 pl-2 ${defaultCalsses}`} onClick={btnDisplayFunc}>
-                {update[2]}
+                {update.comments}
               </td>
             </tr>
           ))}
