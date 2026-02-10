@@ -69,7 +69,7 @@ export const TaskContextProvider = ({ children }) => {
     const newTask = {
       id: crypto.randomUUID(),
       taskDescription: formData.title,
-      taskCategory: formData.taskCategory === "create_new_category" ? formData.newCategory : formData.taskCategory,
+      taskCategory: formData.taskCategory === "Create New Category" ? formData.newCategory : formData.taskCategory,
       taskUpdate: [[new Date().toLocaleDateString(), formData.latestAction, formData.comments]],
     };
 

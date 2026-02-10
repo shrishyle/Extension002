@@ -49,7 +49,7 @@ const CreateNewTaskForm = () => {
         <InputElement label={`Latest Action`} name={`latestAction`} type={`text`} propClass={``} value={formData.latestAction} onChange={handleChange} />
         <InputElement label={`Comments`} name={`comments`} type={`text`} propClass={``} value={formData.comments} onChange={handleChange} />
         <SelectionInputElement label="Select Task Category" name="taskCategory" value={formData.taskCategory} taskCategories={uniqueTaskCategories} onChange={handleChange} />
-        {formData.taskCategory === "create_new_category" && <InputElement label="New Category Name" name="newCategory" type="text" value={formData.newCategory} onChange={handleChange} />}
+        {formData.taskCategory === "Create New Category" && <InputElement label="New Category Name" name="newCategory" type="text" value={formData.newCategory} onChange={handleChange} />}
         <Button type={`submit`} propClasses={``} label={`Save Task`} disabled={!formData.title || !formData.taskCategory} />
         <Button type={`button`} propClasses={``} label={`Cancel`} clickHandler={clearSidebar} />
       </form>
