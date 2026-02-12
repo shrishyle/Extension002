@@ -12,7 +12,7 @@ const TableBody = ({ taskCategory }) => {
   let btnDisplayFunc = (taskId, updateId) => {
     clearSidebar();
     hide_create_new_task_btn_func();
-    show_add_update_btn_func(taskId, updateId);
+    // show_add_update_btn_func(taskId, updateId);
     show_modify_update_btn_func(taskId, updateId);
   };
 

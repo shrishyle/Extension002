@@ -78,7 +78,7 @@ export const FormDisplayContextProvider = ({ children }) => {
     hide_create_new_task_btn_func: () => setDisplay({ showCreateNewTaskBtn: false }),
     show_modify_task_btn_func: (taskId) => setDisplay({ showModifyTaskBtn: true, selectedTaskId: taskId }),
     hide_modify_task_btn_func: () => setDisplay({ showModifyTaskBtn: false }),
-    show_add_update_btn_func: (taskId, updateId = null) => setDisplay({ showAddUpdateBtn: true, selectedTaskId: taskId, selectedUpdateId: updateId }),
+    show_add_update_btn_func: (taskId) => setDisplay({ showAddUpdateBtn: true, selectedTaskId: taskId }),
     hide_add_update_btn_func: () => setDisplay({ showAddUpdateBtn: false }),
     show_modify_update_btn_func: (taskId, updateId = null) => setDisplay({ showModifyUpdateBtn: true, selectedTaskId: taskId, selectedUpdateId: updateId }),
     hide_modify_update_btn_func: () => setDisplay({ showModifyUpdateBtn: false }),

@@ -8,16 +8,14 @@ import { TaskContext } from "../../store/task-context";
 const AddUpdateForm = () => {
   const { clearSidebar, show_create_new_task_btn_func, formDisplay } = useContext(FormDisplayContext);
   const { tasks, addNewUpdate } = useContext(TaskContext);
-  const { selectedTaskId, selectedUpdateId } = formDisplay;
+  const { selectedTaskId } = formDisplay;
 
   const taskId = formDisplay.selectedTaskId;
   const selectedTask = tasks.find((task) => task.id === taskId);
-  const selectedUpdate = selectedTask.taskUpdate.find((update) => update.id === selectedUpdateId);
-  const { action, comments } = selectedUpdate;
 
   const [formData, setFormData] = useState({
-    latestAction: action,
-    comments: comments,
+    action: "",
+    comments: "",
   });
 
   const handleChange = (e) => {
@@ -33,7 +31,7 @@ const AddUpdateForm = () => {
     addNewUpdate(selectedTaskId, {
       id: crypto.randomUUID(),
       date: new Date().toLocaleDateString(),
-      action: formData.latestAction,
+      action: formData.action,
       comments: formData.comments,
     });
     clearSidebar();
@@ -44,9 +42,9 @@ const AddUpdateForm = () => {
     <>
       <form onSubmit={handleSubmit}>
         <div className="w-full h-12 bg-teal-700 flex flex-col justify-center border mt-2 rounded-sm text-teal-50 text-center">Add Update</div>
-        <InputElement label={`Task Update`} name={`task_update`} type={`text`} propClass={``}  onChange={handleChange} />
-        <InputElement label={`Comments`} name={`comments`} type={`text`} propClass={``} onChange={handleChange} />
-        <Button type={`submit`} propClasses={``} label={`Add Update`} clickHandler="" />
+        <InputElement label={`Task Update`} name={`action`} type={`text`} propClass={``} value={formData.action} onChange={handleChange} />
+        <InputElement label={`Comments`} name={`comments`} type={`text`} propClass={``} value={formData.comments} onChange={handleChange} />
+        <Button type={`submit`} propClasses={``} label={`Add Update`} />
         <Button
           type={`button`}
           propClasses={``}
