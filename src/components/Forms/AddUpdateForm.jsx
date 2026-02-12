@@ -7,11 +7,8 @@ import { TaskContext } from "../../store/task-context";
 
 const AddUpdateForm = () => {
   const { clearSidebar, show_create_new_task_btn_func, formDisplay } = useContext(FormDisplayContext);
-  const { tasks, addNewUpdate } = useContext(TaskContext);
+  const { addNewUpdate } = useContext(TaskContext);
   const { selectedTaskId } = formDisplay;
-
-  const taskId = formDisplay.selectedTaskId;
-  const selectedTask = tasks.find((task) => task.id === taskId);
 
   const [formData, setFormData] = useState({
     action: "",
