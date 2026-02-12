@@ -10,7 +10,7 @@ const TableBody = ({ taskCategory }) => {
   let defaultClasses = "border cursor-pointer border-gray-300";
 
   let btnDisplayFunc = (taskId, updateId) => {
-    // clearSidebar();
+    clearSidebar();
     hide_create_new_task_btn_func();
     show_add_update_btn_func(taskId, updateId);
     show_modify_update_btn_func(taskId, updateId);
@@ -28,6 +28,7 @@ const TableBody = ({ taskCategory }) => {
               rowSpan={task.taskUpdate.length + 1}
               className={`pr-3 pl-3 ${defaultClasses}`}
               onClick={() => {
+                // clearSidebar();
                 hide_create_new_task_btn_func();
                 show_add_update_btn_func(task.id);
                 show_modify_task_btn_func(task.id);

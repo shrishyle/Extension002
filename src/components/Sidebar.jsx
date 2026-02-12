@@ -4,6 +4,7 @@ import { FormDisplayContext } from "../store/form-display-context";
 import CreateNewTaskForm from "./Forms/CreateNewTaskForm";
 import ModifyTaskForm from "./Forms/ModifyTaskForm";
 import AddUpdateForm from "./Forms/AddUpdateForm";
+import ModifyUpdateForm from "./Forms/ModifyUpdateForm";
 import Button from "./Button";
 
 const Sidebar = () => {
@@ -13,8 +14,8 @@ const Sidebar = () => {
     <div className="w-1/7 min-h-screen bg-teal-50 flex flex-col items-center justify-top shadow-md text-grey-500 p-1">
       {formDisplay.showCreateNewTaskForm && <CreateNewTaskForm />}
       {formDisplay.showModifyTaskForm && <ModifyTaskForm />}
-      {formDisplay.showModifyUpdateForm && <ModifyTaskForm />}
       {formDisplay.showAddUpdateForm && <AddUpdateForm />}
+      {formDisplay.showModifyUpdateForm && <ModifyUpdateForm />}
 
       {formDisplay.showCreateNewTaskBtn && (
         <Button
